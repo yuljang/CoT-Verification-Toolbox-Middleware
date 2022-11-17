@@ -16,7 +16,8 @@ class Input(BaseModel):
 app = FastAPI()
 my_decoder = gpt_request.Decoder()
 my_summarizer = speedup.SpeedyPipeline()
-demo = """[Example 1]
+demo = """
+[Example 1]
 Question: Do hamsters provide food for any animals?
 Output:
 Sub Question #0 : What type of animals are hamsters?
@@ -25,7 +26,7 @@ Sub Question #1 : Can prey animals be food for other animals?
 Sub Answer #1 : Prey are food for predators.
 Sub Question #2 : Do hamsters provide food for any animals?
 Sub Answer #2 : Since hamsters are prey animals, and prey are food for predetors, hamsters provide food for some animals.
-Final Answer : So the answer is yes.
+So the answer is yes.
 
 [Example 2]
 Question: Could Brooke Shields succeed at University of Pennsylvania?
