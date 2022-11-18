@@ -100,9 +100,9 @@ Output:
 
 
 # formatting returned output from gpt-3 for search module
-def formatter(input):
+def formatter(input, question):
     output = {}
-    output["question"] = input
+    output["question"] = question
     output["explanation"] = {}
     output["output"] = {}
     for index in range(math.floor(len(input)/2)):
@@ -122,7 +122,7 @@ async def root():
 
 @app.post("/test")
 async def test(input: Input):
-    output = formatter(my_decoder.decode(demo.format(input.question), key=os.getenv('GPT3_KEY')))
+    output = formatter(my_decoder.decode(demo.format(input.question), key=os.getenv('GPT3_KEY')), input.question)
     output = asyncio.run(search_yul.search(output, os.getenv('GOOGLE_SEARCH_API_KEY'), os.getenv('GOOGLE_ENGINE_ID_KEY')))
     output = my_summarizer.process_one(output)
 
