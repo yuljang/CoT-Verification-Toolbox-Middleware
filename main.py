@@ -123,7 +123,7 @@ async def root():
 @app.post("/test")
 async def test(input: Input):
     output = formatter(my_decoder.decode(demo.format(input.question), key=os.getenv('GPT3_KEY')), input.question)
-    output = asyncio.run(search_yul.search(output, os.getenv('GOOGLE_SEARCH_API_KEY'), os.getenv('GOOGLE_ENGINE_ID_KEY')))
+    output = await search_yul.search(output, os.getenv('GOOGLE_SEARCH_API_KEY'), os.getenv('GOOGLE_ENGINE_ID_KEY'))
     output = my_summarizer.process_one(output)
 
     return output
